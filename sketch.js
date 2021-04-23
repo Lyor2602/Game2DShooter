@@ -23,6 +23,7 @@ let img;
 let check;
 //let bullet = [];
 
+
 function preload() {
   img = loadImage("hood.jpg")
   check = loadImage("checkers.jpg")
@@ -55,7 +56,7 @@ function draw() {
       x -= 2
       if (!bulletIsMoving) xBullet -= 2;
       if (!bullet2IsMoving) xBullet2 -= 2;
-    }
+    }dd
   }
   // D
   else if (keyIsDown(68)) {
@@ -86,6 +87,10 @@ function draw() {
   // finishlijn tekenen
   image(check, 420, 0, 30, 200);
   player();
+
+  //highscore 
+  
+ 
 
   // ook vierkantjes?
   fill(255, 165, 100)
@@ -128,11 +133,13 @@ class pipi{
       fill(160, 160, 160)
       rect(this.x, this.y + 20, 15, 5)
     if (this.x < x + 20 && this.x + 20 > x && this.y + 30 > y && this.y + 45 < y + 90){
-    textSize(100);
-    text('Game Over', 50, 100);
-    textSize(30)
-    text("Your score was: " + score, 50, 150)
-    exit()
+     // localStorage.setItem("score", score)
+     // document.getElementById("result").innerHTML = localStorage.getItem("score");
+     // textSize(30)
+     // text(result, 500, 20)
+      reset()
+      
+
   }
   else if (xBullet > this.x && yBullet < this.y + 30 && yBullet > this.y) {
     this.x = random(1000,1300);
@@ -153,6 +160,46 @@ class pipi{
   }
   }
 }
+
+
+function reset() {
+
+    textSize(100);
+    text('Game Over', 50, 100);
+    textSize(30)
+    text("Your score was: " + score, 50, 150)
+    noLoop();
+    reset();
+    
+  if (keyCode == 13) {
+      x = 0
+      y = 150
+      xBullet = x
+      yBullet = y + 20
+      xBullet2 = x
+      yBullet2 = y + 20 
+      bulletIsMoving = false
+      bullet2IsMoving = false
+      xEnemy = 500
+      yEnemy = 50
+      enemy = [];
+      n = 0 // Om te checken welke bullet klaar is om te schieten
+      ammo = 2 // Hoeveelheid bullets klaar om te schieten
+      score = 0 // De score
+      for (let i = 0; i < 15; i++) {
+        enemy.push(new pipi());
+      }
+      loop()
+    }
+  }
+  
+
+  //while (!keyIsPressed) {
+    //textSize(100);
+      //text('Game Over', 50, 100);
+      //textSize(30)
+      //text("Your score was: " + score, 50, 150)
+      //}
 
 
 
@@ -268,20 +315,8 @@ else if (keyCode === 32 && n == 1) {
 }
 }
 
-//bulletIsMoving = true
- // xBullet += speed
-  //if (xBullet > 600) {
-   // xBullet = x + 40
-   // yBullet = y + 13
-   // bulletIsMoving = false
- // } 
- // else
- // if (xBullet > xEnemy && yBullet < yEnemy + 30 && yBullet > yEnemy) {
-   // xBullet = x + 40
-   // yBullet = y + 13
-    //bulletIsMoving = false
- // }
- // else {
-  //  setTimeout(bullet, 20)
- // }
-//}
+
+
+//restart knop maken
+// local.storage
+// highscores top right corner
